@@ -19,17 +19,21 @@
         - $deploy_root/conf
     - name: virtualenv
       action: shell virtualenv $virtualenv creates=$virtualenv
+    - name: install distribute
+      action: shell $virtualenv/bin/easy_install -UZ distribute
     - name: required python packages
       action: pip name=$item virtualenv=$virtualenv
       with_items:
-        - psycopg2
+#        - psycopg2
         - python-memcached
+        - setuptools
         - django-pylibmc
+        - MySQL-python
     - name: install sentry
-      action: shell $virtualenv/bin/easy_install -UZ sentry creates=$virtualenv/bin/sentry
+      action: shell $virtualenv/bin/easy_install -UZ sentry
     - name: sentry configuration
       action: template src=templates/sentry.conf.py dest=$sentry_conf_file
-      notify: 
+      notify:
         - reload supervisor
     - name: migrate db
       shell: $virtualenv/bin/sentry --config=$sentry_conf_file upgrade --noinput

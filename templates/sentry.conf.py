@@ -11,10 +11,10 @@ DATABASES = {
 
         # If you change this, you'll also need to install the appropriate python
         # package: psycopg2 (Postgres) or mysql-python
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.mysql',
 
         'NAME': 'sentry',
-        'USER': 'sentry',
+        'USER': 'rwsentry',
         'PASSWORD': 'sentry',
         'HOST': '127.0.0.1',
         'PORT': '',
